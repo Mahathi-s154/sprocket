@@ -69,8 +69,8 @@ pub struct Evaluator {
     cache: Option<CallCache>,
     /// The events for evaluation.
     events: Option<broadcast::Sender<EngineEvent>>,
-    /// Cache for evaluated enum variant values to avoid redundant AST lookups.
-    variant_cache: Arc<Mutex<HashMap<EnumVariantCacheKey, Value>>>,
+    /// Cache for evaluated enum choice values to avoid redundant AST lookups.
+    choice_cache: Arc<Mutex<HashMap<EnumVariantCacheKey, Value>>>,
 }
 
 impl Evaluator {
@@ -118,7 +118,7 @@ impl Evaluator {
             transferer,
             cache,
             events: events.engine().clone(),
-            variant_cache: Default::default(),
+            choice_cache: Default::default(),
         })
     }
 }
