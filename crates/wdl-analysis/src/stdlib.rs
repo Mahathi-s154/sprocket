@@ -4915,7 +4915,7 @@ task values_map {
                 MonomorphicFunction::new(
                     FunctionSignature::builder()
                         .min_version(SupportedVersion::V1(V1::One))
-                        .type_parameter("K", PrimitiveTypeConstraint)
+                        .type_parameter("K", NonOptionalPrimitiveTypeConstraint)
                         .any_type_parameter("V")
                         .parameter(
                             "pairs",
@@ -4976,20 +4976,20 @@ task collect_by_key {
                         .any_type_parameter("T")
                         .type_parameter("V", EnumVariantConstraint)
                         .parameter(
-                            "variant",
+                            "choice",
                             GenericType::Parameter("V"),
-                            "An enum variant of any enum type.",
+                            "An enum choice of any enum type.",
                         )
                         .ret(GenericEnumInnerValueType::new("T"))
                         .definition(
                             r##"
-Returns the underlying value associated with an enum variant.
+Returns the underlying value associated with an enum choice.
 
 **Parameters**
 
-1. `Enum`: an enum variant of any enum type.
+1. `Enum`: an enum choice of any enum type.
 
-**Returns**: The variant's associated value.
+**Returns**: The choice's associated value.
 
 Example: test_enum_value.wdl
 
@@ -5287,8 +5287,8 @@ mod test {
                 "contains_key(object: Object, keys: Array[String]) -> Boolean",
                 "values(map: Map[K, V]) -> Array[V] where `K`: any primitive type",
                 "collect_by_key(pairs: Array[Pair[K, V]]) -> Map[K, Array[V]] where `K`: any \
-                 primitive type",
-                "value(variant: V) -> T where `V`: any enum variant",
+                 non-optional primitive type",
+                "value(choice: V) -> T where `V`: any enum choice",
                 "defined(value: X) -> Boolean",
                 "length(array: Array[X]) -> Int",
                 "length(map: Map[K, V]) -> Int",
