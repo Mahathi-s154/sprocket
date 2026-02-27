@@ -2418,7 +2418,7 @@ impl CompoundValue {
     pub fn unwrap_enum_variant(self) -> EnumVariant {
         match self {
             Self::EnumVariant(v) => v,
-            _ => panic!("value is not an enum"),
+            _ => panic!("value is not an enum choice"),
         }
     }
 
