@@ -185,7 +185,7 @@ impl Constraint for PrimitiveTypeConstraint {
     }
 }
 
-/// Represents a constraint that ensures the type is any enumeration variant.
+/// Represents a constraint that ensures the type is any enumeration choice.
 #[derive(Debug, Copy, Clone)]
 pub struct EnumVariantConstraint;
 
