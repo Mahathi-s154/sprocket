@@ -23,7 +23,7 @@ use wdl_ast::TreeToken;
 use wdl_ast::v1::AccessExpr;
 use wdl_ast::v1::CallExpr;
 use wdl_ast::v1::CallTarget;
-use wdl_ast::v1::EnumVariant;
+use wdl_ast::v1::EnumChoice;
 use wdl_ast::v1::LiteralStruct;
 use wdl_ast::v1::LiteralStructItem;
 use wdl_ast::v1::ParameterMetadataSection;
@@ -196,7 +196,7 @@ fn resolve_hover_by_context(
             }
         }
         SyntaxKind::EnumVariantNode => {
-            let variant = EnumVariant::cast(parent_node.clone()).unwrap();
+            let variant = EnumChoice::cast(parent_node.clone()).unwrap();
             let variant_name = variant.name().text().to_string();
 
             // Show the variant value (explicit or inferred)
@@ -299,7 +299,7 @@ fn resolve_hover_by_context(
 
                             // Find the specific variant
                             if let Some(variant) = definition
-                                .variants()
+                                .choices()
                                 .find(|v| v.name().text() == member.text())
                             {
                                 let value_str = if let Some(value_expr) = variant.value() {
@@ -375,7 +375,7 @@ fn resolve_hover_by_context(
 
                             // Find the specific variant
                             if let Some(variant) = definition
-                                .variants()
+                                .choices()
                                 .find(|v| v.name().text() == member.text())
                             {
                                 let value_str = if let Some(value_expr) = variant.value() {

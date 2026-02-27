@@ -652,7 +652,7 @@ fn resolve_access_expression(
                     .expect("should cast to enum definition");
 
             if let Some(variant) = enum_node
-                .variants()
+                .choices()
                 .find(|v| v.name().text() == access_ident.text())
             {
                 let variant_span = variant.name().span();
@@ -694,7 +694,7 @@ fn resolve_access_expression(
             .expect("should cast to enum definition");
 
         let Some(variant) = enum_node
-            .variants()
+            .choices()
             .find(|v| v.name().text() == access_ident.text())
         else {
             return Ok(None);
@@ -773,7 +773,7 @@ fn resolve_access_expression(
         let enum_node = enum_def.definition();
 
         let Some(variant) = enum_node
-            .variants()
+            .choices()
             .find(|v| v.name().text() == access_ident.text())
         else {
             return Ok(None);

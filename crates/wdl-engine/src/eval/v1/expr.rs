@@ -1680,7 +1680,7 @@ pub(crate) fn resolve_enum_variant_value(
 
     let variant = r#enum
         .definition()
-        .variants()
+        .choices()
         .find(|variant| variant.name().text() == variant_name)
         .ok_or(unknown_enum_variant(enum_ty.name(), variant_name))?;
 
