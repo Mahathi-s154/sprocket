@@ -926,10 +926,10 @@ impl Document {
     ) -> Option<crate::types::EnumVariantCacheKey> {
         let (enum_index, _, r#enum) = self.data.enums.get_full(name)?;
         let enum_ty = r#enum.ty()?.as_enum()?;
-        let variant_index = enum_ty.variants().iter().position(|v| v == variant)?;
+        let choice_index = enum_ty.variants().iter().position(|v| v == variant)?;
         Some(crate::types::EnumVariantCacheKey::new(
             enum_index,
-            variant_index,
+            choice_index,
         ))
     }
 

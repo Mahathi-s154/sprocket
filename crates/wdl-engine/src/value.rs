@@ -2177,15 +2177,15 @@ impl fmt::Display for Struct {
 pub struct EnumVariant {
     /// The type of the enum containing this variant.
     enum_ty: EnumType,
-    /// The index of the variant in the enum type.
-    variant_index: usize,
-    /// The value of the variant.
+    /// The index of the choice in the enum type.
+    choice_index: usize,
+    /// The value of the choice.
     value: Arc<Value>,
 }
 
 impl PartialEq for EnumVariant {
     fn eq(&self, other: &Self) -> bool {
-        self.enum_ty == other.enum_ty && self.variant_index == other.variant_index
+        self.enum_ty == other.enum_ty && self.choice_index == other.choice_index
     }
 }
 
@@ -2199,7 +2199,7 @@ impl EnumVariant {
         let enum_ty = enum_ty.into();
         let value = Arc::new(value.into());
 
-        let variant_index = enum_ty
+        let choice_index = enum_ty
             .variants()
             .iter()
             .position(|v| v == name)
@@ -2207,7 +2207,7 @@ impl EnumVariant {
 
         Self {
             enum_ty,
-            variant_index,
+            choice_index,
             value,
         }
     }
@@ -2219,7 +2219,7 @@ impl EnumVariant {
 
     /// Gets the name of the variant.
     pub fn name(&self) -> &str {
-        &self.enum_ty.variants()[self.variant_index]
+        &self.enum_ty.variants()[self.choice_index]
     }
 
     /// Gets the value of the variant.
